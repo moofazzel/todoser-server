@@ -63,14 +63,15 @@ try {
 try {
   app.put("/task/:id", async (req, res) => {
     const id = req.params.id;
+    console.log(id);
     const filter = { _id: ObjectId(id) };
     const option = { upsert: true };
     const updateDoc = {
       $set: {
-        task: "admin",
+        status: true,
       },
     };
-    const result = await userCollections.updateOne(filter, updateDoc, option);
+    const result = await allTasks.updateOne(filter, updateDoc, option);
     res.send(result);
   });
 } catch (error) {
